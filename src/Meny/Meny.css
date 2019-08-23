@@ -1,0 +1,22 @@
+.meny {
+    background-color: #232323;
+    height: 100%;
+    width: 18rem;
+    padding: 3rem;
+}
+
+.meny__header {
+    text-align: center;
+    color: white;
+    padding-bottom: 5rem;
+}
+
+.meny__valg {
+    text-align: center;
+    color: white;
+}
+
+.meny__valg-item:hover {
+    color: gray;
+    cursor: pointer;
+}
