@@ -1,3 +1,4 @@
+const dotenv = require("dotenv");
 const mail = require("./mail");
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -6,6 +7,7 @@ const app = express();
 const morgan = require("morgan");
 const port = process.env.PORT || 9000;
 
+dotenv.config();
 app.use(express.static(path.join(__dirname, "build")));
 app.use(morgan("combined"));
 

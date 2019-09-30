@@ -3,12 +3,29 @@ import axios from "axios";
 import classNames from "classnames";
 import "./kontakt.css";
 
+enum statuser {
+    "INITIAL",
+    "SENDER",
+    "FEILET",
+    "SUKSESS"
+}
+
 const Kontakt: React.FunctionComponent<{}> = () => {
     const [navn, settNavn] = React.useState("");
     const [epost, settEpost] = React.useState("");
     const [melding, settMelding] = React.useState("");
+    const [status, settStatus] = React.useState(statuser.INITIAL);
     const [focus, settFocus] = React.useState(0);
 
+    const settSendingStatus = (status: statuser, timeout?: number) => {
+        settStatus(status);
+
+        if (timeout) {
+            setTimeout(() => {
+                settStatus(statuser.INITIAL);
+            }, 5000);
+        }
+    };
     return (
         <div className={"kontakt"}>
             <p className={"kontakt__ingress"}>
@@ -20,11 +37,23 @@ const Kontakt: React.FunctionComponent<{}> = () => {
             <form
                 id={"kontaktform"}
                 onSubmit={event => {
-                    axios.post("/sendmail", {
-                        epost,
-                        melding,
-                        navn
-                    });
+                    settSendingStatus(statuser.SENDER);
+
+                    axios
+                        .post("/sendmail", {
+                            epost,
+                            melding,
+                            navn
+                        })
+                        .then(() => {
+                            settNavn("");
+                            settEpost("");
+                            settMelding("");
+                            settSendingStatus(statuser.SUKSESS, 5000);
+                        })
+                        .catch(() => {
+                            settSendingStatus(statuser.FEILET);
+                        });
 
                     event.preventDefault();
                 }}
@@ -90,6 +119,22 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                     </div>
                 </div>
             </form>
+
+            {status === statuser.FEILET && (
+                <div style={{ color: "red", padding: "1rem 0" }}>
+                    Sending feilet!
+                </div>
+            )}
+
+            {status === statuser.SENDER && (
+                <div style={{ padding: "1rem 0" }}>Sender melding...</div>
+            )}
+
+            {status === statuser.SUKSESS && (
+                <div style={{ color: "green", padding: "1rem 0" }}>
+                    Melding sendt!
+                </div>
+            )}
 
             <button type="submit" form="kontaktform" value="Send">
                 Send inn
