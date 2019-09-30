@@ -3,10 +3,12 @@ const logger = require("loglevel");
 logger.setDefaultLevel(logger.levels.INFO);
 
 const sendMail = (res, body) => {
+    console.log(process.env.user);
+
     let transporter = nodemailer.createTransport({
-        host: "smtp.googlemail.com", // Gmail Host
-        port: 465, // Port
-        secure: true, // this is true as port is 465
+        host: "smtp.googlemail.com",
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.user,
             pass: process.env.password
