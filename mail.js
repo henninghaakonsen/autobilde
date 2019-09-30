@@ -11,7 +11,7 @@ const sendMail = (res, body) => {
         secure: true,
         auth: {
             user: process.env.user,
-            pass: process.env.password
+            pass: process.env.app_password
         }
     });
 
@@ -35,10 +35,10 @@ const sendMail = (res, body) => {
         if (error) {
             res.status(500).send();
             logger.error(error);
+        } else {
+            logger.info("Melding sendt vellykket: %s", info);
+            res.status(200).send();
         }
-
-        logger.info("Melding sendt vellykket: %s", info);
-        res.status(200).send();
     });
 };
 
