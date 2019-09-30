@@ -3,8 +3,6 @@ const logger = require("loglevel");
 logger.setDefaultLevel(logger.levels.INFO);
 
 const sendMail = (res, body) => {
-    console.log(process.env.user);
-
     let transporter = nodemailer.createTransport({
         host: "smtp.googlemail.com",
         port: 465,
@@ -36,7 +34,7 @@ const sendMail = (res, body) => {
             res.status(500).send();
             logger.error(error);
         } else {
-            logger.info("Melding sendt vellykket: %s", info);
+            logger.info("Melding sendt vellykket: %s", info.messageId);
             res.status(200).send();
         }
     });
