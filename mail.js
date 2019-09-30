@@ -4,12 +4,12 @@ logger.setDefaultLevel(logger.levels.INFO);
 
 const sendMail = (res, body) => {
     let transporter = nodemailer.createTransport({
-        host: "smtp.googlemail.com", // Gmail Host
-        port: 465, // Port
-        secure: true, // this is true as port is 465
+        host: "smtp.googlemail.com",
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.user,
-            pass: process.env.password
+            pass: process.env.app_password
         }
     });
 
@@ -33,10 +33,10 @@ const sendMail = (res, body) => {
         if (error) {
             res.status(500).send();
             logger.error(error);
+        } else {
+            logger.info("Melding sendt vellykket: %s", info.messageId);
+            res.status(200).send();
         }
-
-        logger.info("Melding sendt vellykket: %s", info.messageId);
-        res.status(200).send();
     });
 };
 
