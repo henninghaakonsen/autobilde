@@ -1,8 +1,11 @@
 .meny {
-    background-color: #232323;
+    background-color: rgba(35,35,35,1);
     height: 100%;
     width: 18rem;
-    padding: 3rem;
+}
+
+.meny__content {
+    padding: 2rem;
 }
 
 .meny__header {
@@ -16,7 +19,11 @@
     color: white;
 }
 
-.meny__valg-item:hover {
+.meny__valg-item:hover:not(.valgtside) {
     color: gray;
     cursor: pointer;
+}
+
+.valgtside {
+    color: gray;
 }

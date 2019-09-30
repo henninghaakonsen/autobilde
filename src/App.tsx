@@ -3,31 +3,58 @@ import Meny from "./Meny/Meny";
 import "./App.css";
 import Tjenester from "./Sider/Tjenester/Tjenester";
 import Portfolio from "./Sider/Portfolio/Portfolio";
+import Kontakt from "./Sider/Kontakt/Kontakt";
+import BildeMedTittel from "./BildeMedTittel/BildeMedTittel";
+import Om from "./Sider/Om/Om";
 
-interface IMenyValg {
-    [key: string]: any;
+export interface IMenyValg {
+    id: string;
+    label: string;
+    side: () => React.ReactNode;
 }
 
-const menyValg: IMenyValg = {
+export interface IMeny {
+    [key: string]: IMenyValg;
+}
+
+const menyValg: IMeny = {
     "1": {
         id: "1",
-        label: "Tjenester",
-        side: () => <Tjenester />
+        label: "Bilder",
+        side: () => <Portfolio />
     },
     "2": {
         id: "2",
-        label: "Portfolio",
-        side: () => <Portfolio />
+        label: "Tjenester",
+        side: () => (
+            <BildeMedTittel
+                bildeSrc={"/Tesla_Model_S_01.jpg"}
+                tittel={"Tjenester"}
+                innhold={() => <Tjenester />}
+            />
+        )
     },
     "3": {
         id: "3",
         label: "Om",
-        side: () => <div />
+        side: () => (
+            <BildeMedTittel
+                bildeSrc={"/Tesla_Model_S_01.jpg"}
+                tittel={"Om"}
+                innhold={() => <Om />}
+            />
+        )
     },
     "4": {
         id: "4",
         label: "Kontakt",
-        side: () => <div />
+        side: () => (
+            <BildeMedTittel
+                bildeSrc={"/Tesla_Model_S_01.jpg"}
+                tittel={"Kontakt"}
+                innhold={() => <Kontakt />}
+            />
+        )
     }
 };
 

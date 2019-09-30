@@ -1,3 +1,8 @@
-.Tjenester {
+.tjenester {
+    color: white;
+}
+
+.tjenester__innhold {
+    padding: 2rem;
     color: white;
 }

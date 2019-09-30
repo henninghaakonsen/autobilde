@@ -66,6 +66,7 @@ const Portfolio: React.FunctionComponent = () => {
             <Gallery
                 photos={photos}
                 onClick={(event, photos) => openLightbox(photos.index)}
+                margin={5}
             />
             {viewerIsOpen && (
                 <Lightbox
