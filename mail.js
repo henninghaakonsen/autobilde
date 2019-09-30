@@ -37,7 +37,7 @@ const sendMail = (res, body) => {
             logger.error(error);
         }
 
-        logger.info("Melding sendt vellykket: %s", info.messageId);
+        logger.info("Melding sendt vellykket: %s", info);
         res.status(200).send();
     });
 };
