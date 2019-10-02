@@ -1,5 +1,4 @@
 import * as React from "react";
-import ImageGallery from "react-image-gallery";
 import { IPhoto, hentIndex } from "../../Portfolio/Portfolio";
 
 const annonsefotos: any[] = Array.from(Array(28).keys()).reduce(
@@ -37,8 +36,6 @@ const Annonsefoto: React.StatelessComponent = () => {
                 iudicabit, vim mundi aliquam necessitatibus et, laudem
                 adolescens sea ut.
             </p>
-
-            <ImageGallery items={annonsefotos} />
         </div>
     );
 };
