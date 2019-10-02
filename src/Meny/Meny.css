@@ -6,16 +6,24 @@
 
 .meny__content {
     padding: 2rem;
+    height: 100%;
 }
 
-.meny__header {
-    text-align: center;
-    color: white;
-    padding-bottom: 5rem;
+.meny__list {
+    margin-top: 15rem;
+    padding: 0 3rem;
 }
 
-.meny__valg {
-    text-align: center;
+.meny__logo {
+    width: 14rem
+}
+
+.meny__subvalg-item {
+    padding-left: 1rem;
+}
+
+.meny__valg-item {
+    text-align: left;
     color: white;
 }
 
@@ -26,4 +34,9 @@
 
 .valgtside {
     color: gray;
+}
+
+.link {
+    color: inherit; 
+    text-decoration: inherit;
 }

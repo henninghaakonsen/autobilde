@@ -1,11 +1,13 @@
-.App {
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+.app {
   display: flex;
   height: 100%;
   position: fixed;
   width: 100%;
 }
 
-.Content {
+.content {
   width: calc(100% - 18rem);
   overflow: auto;
   background-color: black;

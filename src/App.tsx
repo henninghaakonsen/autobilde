@@ -1,74 +1,59 @@
 import React from "react";
 import Meny from "./Meny/Meny";
-import "./App.css";
+import Annonsefoto from "./Sider/Tjenester/Annonsefoto/Annonsefoto";
 import Tjenester from "./Sider/Tjenester/Tjenester";
 import Portfolio from "./Sider/Portfolio/Portfolio";
 import Kontakt from "./Sider/Kontakt/Kontakt";
 import BildeMedTittel from "./BildeMedTittel/BildeMedTittel";
 import Om from "./Sider/Om/Om";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-export interface IMenyValg {
-    id: string;
-    label: string;
-    side: () => React.ReactNode;
-}
-
-export interface IMeny {
-    [key: string]: IMenyValg;
-}
-
-const menyValg: IMeny = {
-    "1": {
-        id: "1",
-        label: "Bilder",
-        side: () => <Portfolio />
-    },
-    "2": {
-        id: "2",
-        label: "Tjenester",
-        side: () => (
-            <BildeMedTittel
-                bildeSrc={"/Tesla_Model_S_01.jpg"}
-                tittel={"Tjenester"}
-                innhold={() => <Tjenester />}
-            />
-        )
-    },
-    "3": {
-        id: "3",
-        label: "Om",
-        side: () => (
-            <BildeMedTittel
-                bildeSrc={"/Tesla_Model_S_01.jpg"}
-                tittel={"Om"}
-                innhold={() => <Om />}
-            />
-        )
-    },
-    "4": {
-        id: "4",
-        label: "Kontakt",
-        side: () => (
-            <BildeMedTittel
-                bildeSrc={"/Tesla_Model_S_01.jpg"}
-                tittel={"Kontakt"}
-                innhold={() => <Kontakt />}
-            />
-        )
-    }
-};
+import "./App.css";
 
 const App: React.FC = () => {
-    const [valgtSide, settValgtSide] = React.useState(menyValg["1"].id);
-
     return (
-        <div className="App">
-            <Meny
-                menyValg={menyValg}
-                settValgtSide={settValgtSide}
-                valgtSide={valgtSide}
-            />
-            <div className="Content">{menyValg[valgtSide].side()}</div>
+        <div className="app">
+            <Router>
+                <Meny />
+
+                <div className="content">
+                    <Switch>
+                        <Route exact path="/bilder">
+                            <Portfolio />
+                        </Route>
+                        <Route exact path="/tjenester">
+                            <BildeMedTittel
+                                tittel={"Tjenester"}
+                                innhold={() => <Tjenester />}
+                            />
+                        </Route>
+                        <Route exact path="/tjenester/annonsefoto">
+                            <BildeMedTittel
+                                tittel={"Annonsefoto"}
+                                innhold={() => <Annonsefoto />}
+                            />
+                        </Route>
+                        <Route exact path="/tjenester/privatfoto">
+                            <BildeMedTittel
+                                tittel={"Privatfoto"}
+                                innhold={() => <Kontakt />}
+                            />
+                        </Route>
+                        <Route path="/om">
+                            <BildeMedTittel
+                                tittel={"Om"}
+                                innhold={() => <Om />}
+                            />
+                        </Route>
+                        <Route>
+                            <BildeMedTittel
+                                tittel={"Kontakt"}
+                                innhold={() => <Kontakt />}
+                            />
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
         </div>
     );
 };

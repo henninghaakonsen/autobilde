@@ -20,6 +20,8 @@ const sendMail = (res, body) => {
         html: `<div>
             <h5>Navn:</h5>
             <div>${body.navn}</div>
+            <h5>Telefon:</h5>
+            <div>${body.telefon ? body.telefon : `Ikke oppgitt`}</div>
             <h5>E-post:</h5>
             <div>${body.epost}</div>
             <h5>Melding:</h5>

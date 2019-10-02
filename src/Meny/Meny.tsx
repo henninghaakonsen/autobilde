@@ -1,38 +1,98 @@
 import React from "react";
 import classNames from "classnames";
-import { IMeny } from "../App";
 import "./Meny.css";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
-interface IProps {
-    menyValg: IMeny;
-    settValgtSide: (index: string) => void;
-    valgtSide: string;
-}
+const menyValg = [
+    {
+        path: "/bilder",
+        label: "Bilder"
+    },
+    {
+        path: "/tjenester",
+        label: "Tjenester",
+        submeny: [
+            {
+                path: "/tjenester/annonsefoto",
+                label: "Annonsefoto"
+            },
+            {
+                path: "/tjenester/privatfoto",
+                label: "Privatfoto"
+            }
+        ]
+    },
+    {
+        path: "/om",
+        label: "Om"
+    },
+    {
+        path: "/kontakt",
+        label: "Kontakt"
+    }
+];
 
-const Meny: React.FunctionComponent<IProps> = ({
-    menyValg,
-    settValgtSide,
-    valgtSide
-}) => {
+const Meny: React.FunctionComponent = () => {
+    let location = useLocation();
+
     return (
         <div className={"meny"}>
             <div className={"meny__content"}>
-                <h2 className={"meny__header"}>Autobilde</h2>
-                <div className={"meny__valg"}>
-                    {Object.values(menyValg).map((valg: any) => {
-                        return (
-                            <h5
-                                className={classNames(
-                                    "meny__valg-item",
-                                    valg.id === valgtSide && "valgtside"
-                                )}
-                                key={valg.id}
-                                onClick={() => settValgtSide(valg.id)}
-                            >
-                                {valg.label}
-                            </h5>
-                        );
-                    })}
+                <Link to={"/bilder"}>
+                    <img
+                        className={"meny__logo"}
+                        src={"/logo.png"}
+                        alt={"logo"}
+                    />
+                </Link>
+                <div className={"meny__list"}>
+                    <div className={"meny__valg"}>
+                        {menyValg.map((valg: any) => {
+                            return (
+                                <div key={valg.path}>
+                                    <Link className={"link"} to={valg.path}>
+                                        <h5
+                                            className={classNames(
+                                                "meny__valg-item",
+                                                valg.path ===
+                                                    location.pathname &&
+                                                    "valgtside"
+                                            )}
+                                        >
+                                            {valg.label}
+                                        </h5>
+                                    </Link>
+                                    {valg.submeny &&
+                                        location.pathname.includes(
+                                            "tjenester"
+                                        ) &&
+                                        valg.submeny.map((valg: any) => {
+                                            return (
+                                                <Link
+                                                    className={"link"}
+                                                    key={valg.path}
+                                                    to={valg.path}
+                                                >
+                                                    <h5
+                                                        className={classNames(
+                                                            "meny__subvalg-item",
+                                                            "meny__valg-item",
+                                                            valg.path ===
+                                                                location.pathname &&
+                                                                "valgtside"
+                                                        )}
+                                                        key={valg.path}
+                                                    >
+                                                        - {valg.label}
+                                                    </h5>
+                                                </Link>
+                                            );
+                                        })}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

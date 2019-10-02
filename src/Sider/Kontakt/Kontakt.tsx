@@ -12,6 +12,7 @@ enum statuser {
 
 const Kontakt: React.FunctionComponent<{}> = () => {
     const [navn, settNavn] = React.useState("");
+    const [telefon, settTelefon] = React.useState("");
     const [epost, settEpost] = React.useState("");
     const [melding, settMelding] = React.useState("");
     const [status, settStatus] = React.useState(statuser.INITIAL);
@@ -42,11 +43,13 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                     axios
                         .post("/sendmail", {
                             epost,
+                            telefon,
                             melding,
                             navn
                         })
                         .then(() => {
                             settNavn("");
+                            settTelefon("");
                             settEpost("");
                             settMelding("");
                             settSendingStatus(statuser.SUKSESS, 5000);
@@ -85,10 +88,29 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                     )}
                 >
                     <div className={"field"}>
-                        <div className={"inputlabel"}>E-post</div>
+                        <div className={"inputlabel"}>Telefon</div>
                         <input
                             className={"textinput"}
                             onFocus={() => settFocus(2)}
+                            onBlur={() => settFocus(0)}
+                            onChange={event => settTelefon(event.target.value)}
+                            type={"text"}
+                            value={telefon}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    className={classNames(
+                        "fieldcontainer",
+                        focus === 3 && "focus"
+                    )}
+                >
+                    <div className={"field"}>
+                        <div className={"inputlabel"}>E-post</div>
+                        <input
+                            className={"textinput"}
+                            onFocus={() => settFocus(3)}
                             onBlur={() => settFocus(0)}
                             onChange={event => settEpost(event.target.value)}
                             pattern=".+@.+"
@@ -101,13 +123,13 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                 <div
                     className={classNames(
                         "fieldcontainer",
-                        focus === 3 && "focus"
+                        focus === 4 && "focus"
                     )}
                 >
                     <div className={"field"}>
                         <div className={"inputlabel"}>Melding</div>
                         <textarea
-                            onFocus={() => settFocus(3)}
+                            onFocus={() => settFocus(4)}
                             onBlur={() => settFocus(0)}
                             style={{ marginTop: ".8rem" }}
                             rows={5}

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Lightbox from "react-images";
-import "./Portfolio.css";
+import "./portfolio.css";
 import Gallery from "react-photo-gallery";
 
-const number = (n: number) => {
+export const hentIndex = (n: number) => {
     return n > 9 ? "" + n : "0" + n;
 };
 
-interface IPhoto {
+export interface IPhoto {
     height: number;
     index: number;
     src: string;
@@ -21,7 +21,7 @@ const teslaPhotos: IPhoto[] = Array.from(Array(28).keys()).reduce(
             {
                 height: 2,
                 index: index + 1,
-                src: `/Tesla_Model_S_${number(index + 1)}.jpg`,
+                src: `/Tesla_Model_S_${hentIndex(index + 1)}.jpg`,
                 width: 3
             }
         ];

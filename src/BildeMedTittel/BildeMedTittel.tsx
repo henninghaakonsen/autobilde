@@ -2,13 +2,11 @@ import * as React from "react";
 import "./bildemedtittel.css";
 
 interface IBildeMedTittel {
-    bildeSrc: string;
     tittel: string;
     innhold: () => React.ReactNode;
 }
 
 const BildeMedTittel: React.StatelessComponent<IBildeMedTittel> = ({
-    bildeSrc,
     innhold,
     tittel
 }) => {
