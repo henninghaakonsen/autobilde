@@ -1,7 +1,6 @@
-import * as React from "react";
 import axios from "axios";
 import classNames from "classnames";
-import "./kontakt.css";
+import * as React from "react";
 
 enum statuser {
     "INITIAL",
@@ -18,8 +17,8 @@ const Kontakt: React.FunctionComponent<{}> = () => {
     const [status, settStatus] = React.useState(statuser.INITIAL);
     const [focus, settFocus] = React.useState(0);
 
-    const settSendingStatus = (status: statuser, timeout?: number) => {
-        settStatus(status);
+    const settSendingStatus = (nyStatus: statuser, timeout?: number) => {
+        settStatus(nyStatus);
 
         if (timeout) {
             setTimeout(() => {
@@ -43,9 +42,9 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                     axios
                         .post("/sendmail", {
                             epost,
-                            telefon,
                             melding,
-                            navn
+                            navn,
+                            telefon
                         })
                         .then(() => {
                             settNavn("");
@@ -74,7 +73,7 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                             onFocus={() => settFocus(1)}
                             onBlur={() => settFocus(0)}
                             onChange={event => settNavn(event.target.value)}
-                            required
+                            required={true}
                             type={"text"}
                             value={navn}
                         />
@@ -114,7 +113,7 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                             onBlur={() => settFocus(0)}
                             onChange={event => settEpost(event.target.value)}
                             pattern=".+@.+"
-                            required
+                            required={true}
                             value={epost}
                         />
                     </div>
@@ -135,7 +134,7 @@ const Kontakt: React.FunctionComponent<{}> = () => {
                             rows={5}
                             className={"textinput"}
                             value={melding}
-                            required
+                            required={true}
                             onChange={event => settMelding(event.target.value)}
                         />
                     </div>

@@ -1,40 +1,39 @@
-import React from "react";
 import classNames from "classnames";
-import "./Meny.css";
+import React from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 const menyValg = [
     {
-        path: "/bilder",
-        label: "Bilder"
+        label: "Bilder",
+        path: "/bilder"
     },
     {
-        path: "/tjenester",
         label: "Tjenester",
+        path: "/tjenester",
         submeny: [
             {
-                path: "/tjenester/annonsefoto",
-                label: "Annonsefoto"
+                label: "Annonsefoto",
+                path: "/tjenester/annonsefoto"
             },
             {
-                path: "/tjenester/privatfoto",
-                label: "Privatfoto"
+                label: "Privatfoto",
+                path: "/tjenester/privatfoto"
             }
         ]
     },
     {
-        path: "/om",
-        label: "Om"
+        label: "Om",
+        path: "/om"
     },
     {
-        path: "/kontakt",
-        label: "Kontakt"
+        label: "Kontakt",
+        path: "/kontakt"
     }
 ];
 
 const Meny: React.FunctionComponent = () => {
-    let location = useLocation();
+    const location = useLocation();
 
     return (
         <div className={"meny"}>
@@ -42,7 +41,7 @@ const Meny: React.FunctionComponent = () => {
                 <Link to={"/bilder"}>
                     <img
                         className={"meny__logo"}
-                        src={"/logo.png"}
+                        src={"/api/bilder/logo.png"}
                         alt={"logo"}
                     />
                 </Link>
@@ -67,24 +66,24 @@ const Meny: React.FunctionComponent = () => {
                                         location.pathname.includes(
                                             "tjenester"
                                         ) &&
-                                        valg.submeny.map((valg: any) => {
+                                        valg.submeny.map((subvalg: any) => {
                                             return (
                                                 <Link
                                                     className={"link"}
-                                                    key={valg.path}
-                                                    to={valg.path}
+                                                    key={subvalg.path}
+                                                    to={subvalg.path}
                                                 >
                                                     <h5
                                                         className={classNames(
                                                             "meny__subvalg-item",
                                                             "meny__valg-item",
-                                                            valg.path ===
+                                                            subvalg.path ===
                                                                 location.pathname &&
                                                                 "valgtside"
                                                         )}
-                                                        key={valg.path}
+                                                        key={subvalg.path}
                                                     >
-                                                        - {valg.label}
+                                                        - {subvalg.label}
                                                     </h5>
                                                 </Link>
                                             );

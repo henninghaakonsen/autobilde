@@ -1,14 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import BildeMedTittel from "./BildeMedTittel/BildeMedTittel";
 import Meny from "./Meny/Meny";
+import Kontakt from "./Sider/Kontakt/Kontakt";
+import Om from "./Sider/Om/Om";
+import Portfolio from "./Sider/Portfolio/Portfolio";
 import Annonsefoto from "./Sider/Tjenester/Annonsefoto/Annonsefoto";
 import Tjenester from "./Sider/Tjenester/Tjenester";
-import Portfolio from "./Sider/Portfolio/Portfolio";
-import Kontakt from "./Sider/Kontakt/Kontakt";
-import BildeMedTittel from "./BildeMedTittel/BildeMedTittel";
-import Om from "./Sider/Om/Om";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import "./App.css";
 
 const App: React.FC = () => {
     return (
@@ -18,25 +16,25 @@ const App: React.FC = () => {
 
                 <div className="content">
                     <Switch>
-                        <Route exact path="/bilder">
+                        <Route exact={true} path="/bilder">
                             <Portfolio />
                         </Route>
-                        <Route exact path="/tjenester">
+                        <Route exact={true} path="/tjenester">
                             <BildeMedTittel
                                 tittel={"Tjenester"}
                                 innhold={() => <Tjenester />}
                             />
                         </Route>
-                        <Route exact path="/tjenester/annonsefoto">
+                        <Route exact={true} path="/tjenester/annonsefoto">
                             <BildeMedTittel
                                 tittel={"Annonsefoto"}
                                 innhold={() => <Annonsefoto />}
                             />
                         </Route>
-                        <Route exact path="/tjenester/privatfoto">
+                        <Route exact={true} path="/tjenester/privatfoto">
                             <BildeMedTittel
                                 tittel={"Privatfoto"}
-                                innhold={() => <Kontakt />}
+                                innhold={() => <Annonsefoto />}
                             />
                         </Route>
                         <Route path="/om">

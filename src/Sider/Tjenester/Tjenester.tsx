@@ -1,5 +1,4 @@
 import React from "react";
-import "./Tjenester.css";
 
 const Tjenester: React.FunctionComponent = () => {
     return (

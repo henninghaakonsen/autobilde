@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./bildemedtittel.css";
 
 interface IBildeMedTittel {
     tittel: string;
@@ -11,10 +10,12 @@ const BildeMedTittel: React.StatelessComponent<IBildeMedTittel> = ({
     tittel
 }) => {
     return (
-        <div className={"sidetittel"}>
-            <div className={"sidetittel__bilde"} />
-            <h2 className={"sidetittel__tittel"}>{tittel}</h2>
-            <div className={"sidetittel__innhold"}>{innhold()}</div>
+        <div className={"sideoppsett"}>
+            <div className={"sideoppsett__header"}>
+                <h2 className={"sideoppsett__header__tittel"}>{tittel}</h2>
+            </div>
+
+            <div className={"sideoppsett__innhold"}>{innhold()}</div>
         </div>
     );
 };

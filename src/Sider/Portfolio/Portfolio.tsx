@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Lightbox from "react-images";
-import "./portfolio.css";
 import Gallery from "react-photo-gallery";
 
 export const hentIndex = (n: number) => {
@@ -21,7 +20,7 @@ const teslaPhotos: IPhoto[] = Array.from(Array(28).keys()).reduce(
             {
                 height: 2,
                 index: index + 1,
-                src: `/Tesla_Model_S_${hentIndex(index + 1)}.jpg`,
+                src: `/api/bilder//Tesla_Model_S_${hentIndex(index + 1)}.jpg`,
                 width: 3
             }
         ];
@@ -34,18 +33,18 @@ const testPhotos: IPhoto[] = [
     {
         height: 620,
         index: 1,
-        src: `/Testbilde_01.jpg`,
+        src: `/api/bilder//Testbilde_01.jpg`,
         width: 1920
     },
     {
         height: 2,
         index: 1,
-        src: `/Testbilde_02.jpg`,
+        src: `/api/bilder//Testbilde_02.jpg`,
         width: 3
     }
 ];
 
-const photos = [...testPhotos, ...teslaPhotos];
+const bilder = [...testPhotos, ...teslaPhotos];
 
 const Portfolio: React.FunctionComponent = () => {
     const [currentImage, setCurrentImage] = useState(0);
@@ -62,10 +61,12 @@ const Portfolio: React.FunctionComponent = () => {
     };
 
     return (
-        <div className="Portfolio">
+        <div className="portfolio">
             <Gallery
-                photos={photos}
-                onClick={(event, photos) => openLightbox(photos.index)}
+                photos={bilder}
+                onClick={(event, onClickPhoto) =>
+                    openLightbox(onClickPhoto.index)
+                }
                 margin={5}
             />
             {viewerIsOpen && (
@@ -73,14 +74,14 @@ const Portfolio: React.FunctionComponent = () => {
                     currentImage={currentImage}
                     backdropClosesModal={true}
                     onClickNext={() =>
-                        setCurrentImage((currentImage + 1) % photos.length)
+                        setCurrentImage((currentImage + 1) % bilder.length)
                     }
                     onClickPrev={() =>
                         setCurrentImage(
-                            (currentImage + photos.length - 1) % photos.length
+                            (currentImage + bilder.length - 1) % bilder.length
                         )
                     }
-                    images={photos}
+                    images={bilder}
                     isOpen={viewerIsOpen}
                     onClose={closeLightbox}
                 />
